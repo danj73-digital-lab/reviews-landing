@@ -2,39 +2,70 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recensioni Clienti - Demo</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Recensioni - Landing Page</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <header>
         <h1>Recensioni Clienti</h1>
-        <p>Demo di una pagina responsive per il tuo progetto.</p>
     </header>
     <main>
-        <section class="overview">
-            <h2>Valutazione Media</h2>
-            <div class="stars">⭐⭐⭐⭐☆</div>
-            <p>4.2 su 5 – 320 recensioni totali</p>
+        <section class="filters">
+            <label for="rating">Filtra per punteggio:</label>
+            <select id="rating">
+                <option value="all">Tutti</option>
+                <option value="5">5 Stelle</option>
+                <option value="4">4 Stelle</option>
+                <option value="3">3 Stelle o meno</option>
+            </select>
+
+            <label for="date">Ordina per data:</label>
+            <select id="date">
+                <option value="newest">Più recenti</option>
+                <option value="oldest">Meno recenti</option>
+            </select>
         </section>
-        <section class="reviews">
-            <article>
-                <h3>Daniela B.</h3>
-                <span class="date">10 aprile 2025</span>
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p>Servizio impeccabile! Ho adorato ogni momento.</p>
-            </article>
-            <article>
-                <h3>Mario R.</h3>
-                <span class="date">5 aprile 2025</span>
-                <div class="stars">⭐⭐⭐☆☆</div>
-                <p>Buono ma migliorabile in alcuni aspetti tecnici.</p>
-            </article>
+
+        <section id="reviews">
+            <div class="review" data-rating="5" data-date="2025-04-20">
+                <h3>Cliente 1</h3>
+                <p>Servizio impeccabile, veloce ed efficiente. Tornerò sicuramente!</p>
+                <span>⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="review" data-rating="4" data-date="2025-04-18">
+                <h3>Cliente 2</h3>
+                <p>Buon servizio ma ci sono piccoli margini di miglioramento.</p>
+                <span>⭐⭐⭐⭐</span>
+            </div>
+            <div class="review" data-rating="3" data-date="2025-04-15">
+                <h3>Cliente 3</h3>
+                <p>Esperienza nella media, niente di memorabile.</p>
+                <span>⭐⭐⭐</span>
+            </div>
         </section>
+
+        <button id="seeAll">Vedi tutte le recensioni</button>
     </main>
     <footer>
-        <p>© 2025 Danj73 Digital Lab</p>
+        <p>Fatto con ❤️ da Shirley</p>
     </footer>
+
+    <script>
+        document.getElementById("rating").addEventListener("change", function () {
+            const selected = this.value;
+            const reviews = document.querySelectorAll(".review");
+            reviews.forEach(r => {
+                if (selected === "all") {
+                    r.style.display = "block";
+                } else if (selected === "3") {
+                    r.style.display = parseInt(r.dataset.rating) <= 3 ? "block" : "none";
+                } else {
+                    r.style.display = parseInt(r.dataset.rating) == selected ? "block" : "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
